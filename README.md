@@ -1,12 +1,15 @@
-**TOP IMAGE HERE**
+<p align="center">
+  <img src="/assets/delta logo.png" width="500">
+</p>
 
-# Aircraft Maintenance, Reliability, and Supply Chain Analysis
+# Delta 737 Maintenance, Reliability, and Supply Chain Analysis
 ### *SUBTITLE HERE*
 
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Active-brightgreen"></a>
   <img src="https://img.shields.io/badge/Analytics-Python-gold"></a>
-  <img src="https://img.shields.io/badge/Focus-Aerospace-turqoise"></a>
+  <img src="https://img.shields.io/badge/Visualization-Tableau-hotpink"></a>
+  <img src="https://img.shields.io/badge/Focus-Aerospace-lightblue"></a>
   <img src="https://img.shields.io/badge/Updated-Feb%202026-lightgrey"></a>
 </p>
 
@@ -40,7 +43,7 @@ Data Analytics | Aerospace | Community Impact
 **WHO IS THIS COMPANY HERE**
 
 ### Problem Statement
-**STATEMENT HERE**
+**How can an aviation organization reduce unscheduled maintenance events and their operational and supply chain impacts by identifying high‑risk components, predicting failures, and optimizing parts availability?**
 
 ### Project Aim
 **LIST HERE**
@@ -53,8 +56,8 @@ Data Analytics | Aerospace | Community Impact
 
 <div style="font-size: 0.85em">
 **Resources**
-**LINKS HERE**
-- Click here to access the Dashboards and Project Data (as [Sheets Master Doc].
+
+- Click here to access the Dashboards and Project Data.
 - Click here to access the [Performance Executive Summary]
 - Click here to access the [Impact Analysis Slide Deck]
 
