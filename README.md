@@ -1,15 +1,16 @@
 <p align="center">
-  <img src="/assets/delta logo.png" width="250">
+  <img src="/assets/vectra logo white.png" width="250">
 </p>
 
-# Delta 737 Maintenance, Reliability, and Supply Chain Analysis
+# Delta 737-800 Maintenance, Reliability, and Supply Chain Analysis
 ### *SUBTITLE HERE*
 
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Active-brightgreen"></a>
-  <img src="https://img.shields.io/badge/Analytics-Python-gold"></a>
-  <img src="https://img.shields.io/badge/Visualization-Tableau-hotpink"></a>
   <img src="https://img.shields.io/badge/Focus-Aerospace-lightblue"></a>
+  <img src="https://img.shields.io/badge/Database/Querying-PostgreSQL-white"></a>
+  <img src="https://img.shields.io/badge/Analysis-Python-gold"></a>
+  <img src="https://img.shields.io/badge/Visualization-Tableau-hotpink"></a>
   <img src="https://img.shields.io/badge/Updated-Feb%202026-lightgrey"></a>
 </p>
 
@@ -73,6 +74,15 @@ FAA Service Difficulty Reports (SDR) are used as a proxy for real-world maintena
 ---
 
 ## DATA STRUCTURE OVERVIEW
+
+### Assumptions and Synthetic Logic
+This project uses FAA Service Difficulty Reports (SDRs) as the authoritative source for real maintenance events, failure modes, JASC codes, and component descriptions. Because SDRs only capture failures and discrepancies—not the full aircraft bill of materials—the supply‑chain layer (unit cost, lead time, supplier assignment, stocking levels) is intentionally synthetic. All synthetic values are grounded in real aviation patterns: JASC/ATA chapter drives criticality and lead‑time behavior, part names and conditions influence cost heuristics, and failure frequency from SDRs determines stocking logic. The goal is not to recreate Boeing’s proprietary ERP, but to build a realistic, explainable model that mirrors how reliability and supply‑chain analysts reason about parts when full ERP data is unavailable.
+
+### How the System Works
+The pipeline ingests the SDR composite file, normalizes Part* and Component* fields, and merges them into a unified “parts universe” representing all components that appeared in real maintenance events. From there, the system generates a parts master table with synthetic but aviation‑grounded attributes (cost, lead time, criticality, supplier). A supplier table is created with performance metrics, and an inventory table is derived by combining failure frequency, criticality, cost, and lead‑time heuristics. These tables form a miniature but coherent maintenance‑and‑supply‑chain ecosystem that can be loaded into SQL for analysis and visualized in Tableau for reliability and logistics insights.
+
+### AI‑Generated Components
+The synthetic supply‑chain attributes and the logic that produces them were developed with the assistance of an AI system. The AI did not invent real proprietary data; instead, it generated structured, explainable heuristics based on aviation maintenance conventions, ATA/JASC patterns, and reliability engineering principles. All synthetic elements are clearly separated from the real SDR data, and the methodology is fully documented so that assumptions can be inspected, challenged, or extended. This approach allows the project to remain realistic, transparent, and professionally defensible while still enabling end‑to‑end analytics across maintenance, reliability, and supply‑chain domains.
 
 ### Data Sources
 
