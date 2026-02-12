@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/assets/delta logo.png" width="500">
+  <img src="/assets/delta logo.png" width="250">
 </p>
 
 # Delta 737 Maintenance, Reliability, and Supply Chain Analysis
@@ -40,7 +40,9 @@ Data Analytics | Aerospace | Community Impact
 ---
 
 ## EXECUTIVE SUMMARY
-**WHO IS THIS COMPANY HERE**
+VECTRA SPACE (Fictional Airline) has been operating for the past 150 years, providing top of the line service . . .
+“This project simulates the maintenance and operational challenges of a Boeing 737‑800 fleet operated by a mid‑size U.S. airline.
+FAA Service Difficulty Reports (SDR) are used as a proxy for real-world maintenance events.”
 
 ### Problem Statement
 **How can an aviation organization reduce unscheduled maintenance events and their operational and supply chain impacts by identifying high‑risk components, predicting failures, and optimizing parts availability?**
