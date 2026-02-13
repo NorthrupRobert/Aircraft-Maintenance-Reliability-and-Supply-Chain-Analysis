@@ -1,9 +1,9 @@
 supplier_id,supplier_name,on_time_delivery_rate,avg_delay_days,quality_rating
-S1,Supplier_1,0.859,10,3.05
-S2,Supplier_2,0.888,8,4.06
-S3,Supplier_3,0.944,16,4.85
-S4,Supplier_4,0.88,6,4.03
-S5,Supplier_5,0.875,9,4.43
-S6,Supplier_6,0.893,9,3.25
-S7,Supplier_7,0.899,9,4.26
-S8,Supplier_8,0.858,6,3.86
+S1,Supplier_1,0.878,12,4.42
+S2,Supplier_2,0.854,17,3.74
+S3,Supplier_3,0.88,12,3.06
+S4,Supplier_4,0.945,17,4.98
+S5,Supplier_5,0.896,8,4.86
+S6,Supplier_6,0.914,8,4.4
+S7,Supplier_7,0.976,20,3.95
+S8,Supplier_8,0.985,1,4.6
