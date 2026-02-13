@@ -1,0 +1,136 @@
+Table sdr {
+  operating_control_number varchar [primary key]
+  difficulty_date datetime
+  submission_date datetime
+  operator_designator varchar
+  submit_designator varchar
+  submit_type char
+  region_code varchar
+  receiving_district_office int
+  sdr_type char
+  jasc_code varchar
+  nat_of_cond_a char
+  nat_of_cond_b char
+  nat_of_cond_c char
+  precautionary_procedure_a varchar
+  precautionary_procedure_b varchar
+  precautionary_procedure_c varchar
+  precautionary_procedure_d varchar
+  stage_of_operation_code varchar
+  how_discovered_code varchar
+  crack_length int
+  number_of_cracks int
+  corrosion_level int
+  structural_other	text //e.g. WING LEADING EDGE, R STAB STA 184.70, CUSTOMER REQUEST, KRAS 206, SLAT #4, L STAB STA 129.50
+  discrepancy text
+
+  //Foreign keys to normalized tables
+  aircraft_id varchar
+  part_serial_number varchar
+  component_serial_number varchar
+}
+
+Table aircraft {
+  serial varchar [primary key]
+  registry_n_number varchar
+  make varchar
+  model varchar
+  total_time float
+  total_cycles int
+  engine_make varchar
+  engine_model varchar
+  engine_serial_number varchar //sometimes the aircraft doesnt have this in the data
+}
+
+Table engine {
+  engine_serial_number varchar [primary key]
+  make varchar
+  model varchar
+  total_time float
+  total_cycles int
+  aircraft_id varchar
+}
+
+Table propeller {
+  serial_number varchar [primary key]
+  make varchar
+  model varchar
+  total_time int
+  total_cycles int
+}
+
+Table work_order {
+  id varchar [primary key]
+  sdr_operating_control_number varchar [Ref: > sdr.operating_control_number]
+  date_discovered datetime
+  discovery_code varchar //e.g. OP, V
+  discrepancy text
+  corrective_action text
+  part_number varchar
+  part_name varchar
+  jasc_code varchar
+  maintenance_type varchar //e.g. Line, Base, Overnight, ...
+}
+
+Table part {
+  serial int [primary key]
+  aircraft_serial int [Ref: > aircraft.serial]
+  make varchar
+  name varchar
+  part_number varchar
+  condition varchar
+  location text //e.g. ZONE 200, STALL, GIRT BAR, BLEED SYS, NR 1 ENGINE, ZONE 600 FLAP, EMERGENCY LIGHT, ...
+  total_time int
+  total_cycles int
+  time_since int
+  since_code char
+}
+
+Table component {
+  serial varchar [primary key]
+  name varchar
+  make varchar
+  model varchar
+  part_number varchar
+  location varchar
+  total_time int
+  total_cycles int
+  time_since int
+  since_code char
+}
+
+Table fuselage_station {
+  location text [primary key]
+  from varchar //e.g. 727D, 947, 950, 147.9, 1006+5
+  to varchar
+  stringer_from varchar
+  string_from_side char //e.g. L, R
+  stringer_to varchar
+  string_to_side char
+  WingStationFrom	varchar
+  WingStationFromSide	char
+  WingStationTo	varchar
+  WingStationToSide	char
+  ButtLineFrom varchar
+  ButtLineFromSide	char
+  ButtlineTo varchar
+  ButtlineToSide	char
+  WaterLineFrom	varchar
+  WaterLineTo varchar
+}
+
+Table failure {
+  difficulty_date datetime
+}
+
+Table inventory {
+  component varchar
+}
+
+Table supplier {
+  name varchar
+}
+
+Table purchase_order {
+  id int
+}

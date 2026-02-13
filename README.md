@@ -75,7 +75,31 @@ FAA Service Difficulty Reports (SDR) are used as a proxy for real-world maintena
 
 ## DATA STRUCTURE OVERVIEW
 
-## Note on Synthesized Data
+### Tables
+#### Core tables
+| **Name** | **Features** |
+| --- | --- |
+| aircraft	| Tail numbers, model, age, cycles, hours |
+| components |	Serialized components, ATA chapters, install/remove history |
+| maintenance_events	| Work orders, discrepancies, corrective actions |
+| failures	| Failure events tied to components |
+| inventory	| Stock levels, reorder points, locations |
+| suppliers	| Vendor info, performance metrics |
+| purchase_orders |	Lead times, delays, backorders |
+
+#### Analytical tables (materialized views or ETL outputs) 
+| **Name** | **Features** |
+| --- | --- |
+| reliability_kpis | MTBF, MTTR, availability, repeat failures |
+| supply_chain_kpis | Lead time, fill rate, backorder rate |
+| maintenance_kpis | Scheduled vs unscheduled, downtime, labor hours |
+
+### Data Model
+**ERD IMAGE HERE**
+
+### Why Normalization Was Needed
+
+## Data Sources
 Commercial aviation data is notoriously difficult to obtain. While the FAA publishes SDRs (Service Difficulty Reports), the operational datasets that airlines actually use—work orders, parts catalogs, inventory levels, supplier performance, and maintenance actions—are proprietary and tightly controlled. Because of this, any realistic end‑to‑end maintenance analytics project must blend real public data with carefully designed synthetic layers.
 
 The goal of this project is not to recreate a perfect copy of an airline’s internal database. Instead, the goal is to replicate the structure, relationships, and decision‑making logic that real maintenance, reliability, and supply‑chain analysts work with every day. The synthetic components in this project are built using the same assumptions, constraints, and operational patterns used in commercial M&E systems such as TRAX, AMOS, and Maintenix. That means the learning comes from understanding how the system works—not from the raw data itself.
@@ -111,15 +135,6 @@ Since SDRs do not include supply‑chain data, delays and AOG flags are generate
 
 #### 5. One work order per SDR event
 Airlines typically generate one work order per discrepancy or maintenance event. The synthetic system mirrors this by collapsing multiple SDR rows into a single WO per SDR ID.
-
-### Data Sources
-
-### Why Normalization Was Needed
-
-### Data Model
-The ERD below shows how Events, Members, Officers, and Participation connect to support many‑to‑many relationships essential for engagement and continuity analysis.
-
-**ERD IMAGE HERE**
 
 ### AI‑Generated Components
 The synthetic supply‑chain attributes and the logic that produces them were developed with the assistance of an AI system. The AI did not invent real proprietary data; instead, it generated structured, explainable heuristics based on aviation maintenance conventions, ATA/JASC patterns, and reliability engineering principles. All synthetic elements are clearly separated from the real SDR data, and the methodology is fully documented so that assumptions can be inspected, challenged, or extended. This approach allows the project to remain realistic, transparent, and professionally defensible while still enabling end‑to‑end analytics across maintenance, reliability, and supply‑chain domains.
