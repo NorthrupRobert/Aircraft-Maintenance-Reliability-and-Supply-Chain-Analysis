@@ -25,9 +25,9 @@ Table sdr {
   discrepancy text
 
   //Foreign keys to normalized tables
-  aircraft_id varchar
-  part_serial_number varchar
-  component_serial_number varchar
+  aircraft_serial varchar [ref: < aircraft.serial]
+  part_serial_number varchar [ref: < part.serial]
+  component_serial_number varchar [ref: < component.serial]
 }
 
 Table aircraft {
@@ -37,18 +37,15 @@ Table aircraft {
   model varchar
   total_time float
   total_cycles int
-  engine_make varchar
-  engine_model varchar
-  engine_serial_number varchar //sometimes the aircraft doesnt have this in the data
 }
 
 Table engine {
-  engine_serial_number varchar [primary key]
+  serial varchar [primary key]
   make varchar
   model varchar
   total_time float
   total_cycles int
-  aircraft_id varchar
+  aircraft_serial varchar [ref: < aircraft.serial]
 }
 
 Table propeller {
@@ -57,24 +54,26 @@ Table propeller {
   model varchar
   total_time int
   total_cycles int
+  aircraft_serial varchar [ref: < aircraft.serial]
 }
 
 Table work_order {
   id varchar [primary key]
-  sdr_operating_control_number varchar [Ref: > sdr.operating_control_number]
+  sdr_operating_control_number varchar [Ref: < sdr.operating_control_number]
   date_discovered datetime
   discovery_code varchar //e.g. OP, V
   discrepancy text
   corrective_action text
   part_number varchar
   part_name varchar
+  part_serial varchar [ref: < part.serial]
   jasc_code varchar
   maintenance_type varchar //e.g. Line, Base, Overnight, ...
 }
 
 Table part {
-  serial int [primary key]
-  aircraft_serial int [Ref: > aircraft.serial]
+  serial varchar [primary key]
+  component_serial varchar [Ref: < component.serial]
   make varchar
   name varchar
   part_number varchar
@@ -88,6 +87,7 @@ Table part {
 
 Table component {
   serial varchar [primary key]
+  aircraft_serial varchar [ref: < aircraft.serial]
   name varchar
   make varchar
   model varchar
@@ -99,8 +99,9 @@ Table component {
   since_code char
 }
 
-Table fuselage_station {
-  location text [primary key]
+Table structural_location {
+  id int [primary key]
+  sdr_operating_control_number varchar [ref: < sdr.operating_control_number]
   from varchar //e.g. 727D, 947, 950, 147.9, 1006+5
   to varchar
   stringer_from varchar
@@ -128,7 +129,11 @@ Table inventory {
 }
 
 Table supplier {
+  id varchar [primary key]
   name varchar
+  on_time_delivery_rate float
+  avg_delay_days int
+  quality_rating float
 }
 
 Table purchase_order {
