@@ -95,7 +95,14 @@ FAA Service Difficulty Reports (SDR) are used as a proxy for real-world maintena
 | maintenance_kpis | Scheduled vs unscheduled, downtime, labor hours |
 
 ### Data Model
-**ERD IMAGE HERE**
+![ERD](/data/00_ERDs/erd.png)
+
+<p align="center">
+  <span style="font-size:0.85em;"><em>Figure 1. ERD Model </em></span>
+</p>
+
+To view the full ERD, click [here](/data/00_ERDs/erd.png).
+
 
 ### Why Normalization Was Needed
 

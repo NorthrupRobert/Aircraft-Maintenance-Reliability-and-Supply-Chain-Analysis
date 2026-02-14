@@ -76,7 +76,7 @@ Table part {
   component_serial varchar [Ref: < component.serial]
   make varchar
   name varchar
-  part_number varchar
+  part_number varchar [ref: < parts_master.part_number]
   condition varchar
   location text //e.g. ZONE 200, STALL, GIRT BAR, BLEED SYS, NR 1 ENGINE, ZONE 600 FLAP, EMERGENCY LIGHT, ...
   total_time int
@@ -121,11 +121,26 @@ Table structural_location {
 }
 
 Table failure {
-  difficulty_date datetime
+  id int [primary key]
+  component_serial varchar [ref: < component.serial]
+  part_serial varchar [ref: < part.serial]
+  failure_date datetime
+  failure_mode varchar //e.g. leak, crack, short, seized, ...
+  detected_by varchar //e.g. pilot, maintenance, etc
+  sdr_operating_control_number varchar [ref: < sdr.operating_control_number]
 }
 
-Table inventory {
-  component varchar
+Table bench_stock {
+  part_number varchar [ref: < parts_master.part_number]
+  location varchar // e.g. RNO, LAX, JFK
+  quantity_on_hand int
+  reorder_point int
+  reorder_quantity int
+  unit_cost float
+  lead_time_days int
+  supplier_id varchar [ref: < supplier.id]
+
+  primary key (part_number, location)
 }
 
 Table supplier {
@@ -137,5 +152,36 @@ Table supplier {
 }
 
 Table purchase_order {
-  id int
+  id int [primary key]
+  supplier_id varchar [ref: < supplier.id]
+  part_number varchar [ref: < parts_master.part_number]
+  quantity int
+  order_date datetime
+  expected_delivery_date datetime
+  actual_delivery_date datetime
+  unit_cost float
+  status varchar   // e.g. ordered, shipped, received, delayed
 }
+
+Table parts_master {
+  part_number varchar [primary key]
+  make varchar
+  name varchar
+}
+
+Table work_order_part_usage {
+  work_order_id varchar [ref: < work_order.id]
+  part_number varchar [ref: < parts_master.part_number]
+  location varchar
+  quantity_used int
+
+  primary key (work_order_id, part_number, location)
+}
+
+Table serialized_part_inventory {
+  serial varchar [primary key, ref: < part.serial]
+  location varchar        // e.g. RNO, LAX, JFK, Vendor, Shop
+  status varchar          // e.g. serviceable, unserviceable, in_repair, in_transit
+  last_moved datetime
+}
+
