@@ -103,7 +103,6 @@ FAA Service Difficulty Reports (SDR) are used as a proxy for real-world maintena
 
 To view the full ERD, click [here](/data/00_ERDs/erd.png).
 
-
 ### Why Normalization Was Needed
 
 ## Data Sources
